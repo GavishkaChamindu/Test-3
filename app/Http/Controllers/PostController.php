@@ -35,7 +35,7 @@ $validateData = $req->validate([
     'author_name' => 'required',
     'content' => 'required',
     'image' => 'required',
-   'user_id' => 'required'
+    'user_id' => 'required'
 
 ]);
 
@@ -72,9 +72,32 @@ $post->save();
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit( $id,Request $req)
     {
-        //
+
+
+
+            $post = Post::find($id);
+
+            if (!$post) {
+                return response()->json(['message' => 'Post not found'], 404);
+            }
+
+
+            $validatedData = $req->validate([
+                'title' => 'required',
+                'author_name' => 'required',
+                'content' => 'required',
+                'image' => 'required',
+                'user_id' => 'required',
+            ]);
+
+            $post->update($validatedData);
+
+            return response()->json(['message' => 'Post updated successfully', 'data' => $post]);
+
+
+
     }
 
     /**
@@ -82,7 +105,18 @@ $post->save();
      */
     public function update(Request $request, string $id)
     {
-        //
+
+
+
+
+
+
+
+
+
+
+
+
     }
 
     /**
@@ -90,6 +124,12 @@ $post->save();
      */
     public function destroy(string $id)
     {
-        //
+        $post = Post::find($id);
+        if (!$post) {
+            return response()->json(['message' => 'Post not found'], 404);
+        }
+        $post->delete();
+        return response()->json(['message' => 'Post deleted successfully']);
+
     }
 }
