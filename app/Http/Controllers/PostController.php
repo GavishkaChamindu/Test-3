@@ -44,7 +44,7 @@ $post = new Post;
 $post->title = $validateData['title'];
 $post->author_name = $validateData['author_name'];
 $post->content = $validateData['content'];
-$post->image = $validateData['image'];
+$post->image = $validateData['image']->store('images');
 $post->user_id = $validateData['user_id'];
 
 $post->save();
@@ -66,7 +66,7 @@ $post->save();
      */
     public function show(string $id)
     {
-        //
+    return Post::all();
     }
 
     /**
