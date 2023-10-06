@@ -35,6 +35,7 @@ $validateData = $req->validate([
     'author_name' => 'required',
     'content' => 'required',
     'image' => 'required',
+    'user_image' => 'required',
     'user_id' => 'required'
 
 ]);
@@ -45,6 +46,8 @@ $post->title = $validateData['title'];
 $post->author_name = $validateData['author_name'];
 $post->content = $validateData['content'];
 $post->image = $validateData['image']->store('images');
+$post->user_image = $validateData['user_image']->store('images');
+
 $post->user_id = $validateData['user_id'];
 
 $post->save();
@@ -89,7 +92,10 @@ $post->save();
                 'author_name' => 'required',
                 'content' => 'required',
                 'image' => 'required',
+                'user_image' => 'required',
                 'user_id' => 'required',
+
+
             ]);
 
             $post->update($validatedData);
